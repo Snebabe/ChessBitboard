@@ -11,32 +11,35 @@ class Chess:
     # kanske inte behövs
     pass
 
-  def get_initial_state(self) -> ChessBoard: # -> state (bitboards)
+  def get_initial_state(self) -> ChessBoard: # -> state
     state = ChessBoard()
     state.new_game()
     return state
 
   def get_next_state(self, state: ChessBoard, action: Move) -> ChessBoard: # -> state
-    return state.apply_move(action)
+    state.apply_move(action)
+    return state
 
-  def get_valid_moves(self, state: ChessBoard): # -> map(a1a2 = 0, a1a3 = 1 ...)
+  def get_valid_moves(self, state: ChessBoard): # -> kanske map(a1a2 = 0, a1a3 = 1 ...)
     # kommer nog vara mer komplicerad
     return MoveGen.gen_legal_moves(state)
+  
+  def check_win(self, state: ChessBoard, action: Move) -> bool:
+    pass
 
-  def get_value_and_terminated(self, state: ChessBoard, action: Move): # -> (int, bool)
-    if state.check_win(state, action):
-      return 1, True
-    if state.check_draw(state, action):
-      return 0, True
+  def check_draw(self, state: ChessBoard, action: Move) -> bool:
+    pass
+
+  def get_value_and_terminated(self, state: ChessBoard, action: Move) -> tuple[int, bool]: # -> (int, bool)
     return 0, False
 
-  def get_opponent(self, player: Color): # -> player
+  def get_opponent(self, player: Color) -> Color: # -> player
     return Color.BLACK if player == Color.WHITE else Color.WHITE
 
-  def get_opponent_value(self, value: int): # -> value
+  def get_opponent_value(self, value: int) -> int: # -> value
     return -value
 
-  def change_perspective(self, state: ChessBoard, player: Color): # -> state
+  def change_perspective(self, state: ChessBoard, player: Color) -> ChessBoard: # -> state
     # kanske inte ens behövs 
     pass
 
@@ -47,4 +50,3 @@ class Chess:
     bitboards = state.bitboards
     encoded_state = np.stack((bitboards))
     return encoded_state
-    pass

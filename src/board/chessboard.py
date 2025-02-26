@@ -1,7 +1,9 @@
 import numpy as np
 from utils.constants import Color, Piece, Rank, File
 from square import Square
+from move.move import Move
 
+# ekvivalent med "state"
 class ChessBoard:
   def __init__(self):
     #[[0 0 0 0 0 0],
@@ -34,11 +36,10 @@ class ChessBoard:
 
     return self.bitboards
   
-  def apply_move(self, state, move):
-    # return self.bitboards
+  def apply_move(self, move: Move) -> None:
     pass
     
-  def check_win(self, state, move):
+  def check_win(self, move: Move) -> True:
     pass
 
   def check_draw(self, state, move):
